@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý Khách Hàng</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Thêm Khách Hàng</h2>
+    <form action="/khachhang" method="post">
+        <label>Tên KH:</label><input type="text" name="TenKH" required>
+        <label>SDT:</label><input type="text" name="SDT" required>
+        <label>Địa chỉ:</label><input type="text" name="DiaChi">
+        <button type="submit">Thêm</button>
+    </form>
+
+    <h3>Danh sách Khách Hàng</h3>
+    <table>
+        <tr><th>Mã</th><th>Tên</th><th>SDT</th><th>Địa chỉ</th><th>Hành động</th></tr>
+        {% for kh in ds %}
+        <tr>
+            <td>{{ kh.MaKH }}</td>
+            <td>{{ kh.TenKH }}</td>
+            <td>{{ kh.SDT }}</td>
+            <td>{{ kh.DiaChi }}</td>
+            <td>
+                <form action="/khachhang/delete/{{ kh.MaKH }}" method="post">
+                    <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">← Về trang chủ</a>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý Món Ăn</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Thêm Món Ăn</h2>
+    <form action="/monan" method="post">
+        <label>Tên món:</label><input type="text" name="TenMon" required>
+        <label>Giá:</label><input type="number" name="Gia" step="0.01" required>
+        <label>Mô tả:</label><input type="text" name="MoTa">
+        <button type="submit">Thêm</button>
+    </form>
+
+    <h3>Danh sách Món Ăn</h3>
+    <table>
+        <tr><th>Mã</th><th>Tên</th><th>Giá</th><th>Mô tả</th><th>Hành động</th></tr>
+        {% for m in ds %}
+        <tr>
+            <td>{{ m.MaMon }}</td>
+            <td>{{ m.TenMon }}</td>
+            <td>{{ m.Gia }}</td>
+            <td>{{ m.MoTa }}</td>
+            <td>
+                <form action="/monan/delete/{{ m.MaMon }}" method="post" style="display:inline;">
+                    <button type="submit">🗑️ Xoá</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">← Về trang chủ</a>
+</body>
+</html>

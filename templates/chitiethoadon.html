@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chi Tiết Hóa Đơn</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Thêm Chi Tiết Hóa Đơn</h2>
+    <form action="/chitiethoadon" method="post">
+        <label>Mã HD:</label><input type="number" name="MaHD" required>
+        <label>Mã món:</label><input type="number" name="MaMon" required>
+        <label>Số lượng:</label><input type="number" name="SoLuong" required>
+        <label>Ghi chú:</label><input type="text" name="GhiChu">
+        <button type="submit">Thêm</button>
+    </form>
+
+    <h3>Danh sách Chi Tiết</h3>
+    <table>
+        <tr><th>Mã HD</th><th>Mã Món</th><th>Số lượng</th><th>Ghi chú</th><th>Hành động</th></tr>
+        {% for ct in ds %}
+        <tr>
+            <td>{{ ct.MaHD }}</td>
+            <td>{{ ct.MaMon }}</td>
+            <td>{{ ct.SoLuong }}</td>
+            <td>{{ ct.GhiChu }}</td>
+            <td>
+                <form action="/chitiethoadon/delete" method="post">
+                    <input type="hidden" name="MaHD" value="{{ ct.MaHD }}">
+                    <input type="hidden" name="MaMon" value="{{ ct.MaMon }}">
+                    <button type="submit">🗑️</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">← Về trang chủ</a>
+</body>
+</html>

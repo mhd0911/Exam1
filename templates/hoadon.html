@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý Hóa Đơn</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Thêm Hóa Đơn</h2>
+    <form action="/hoadon" method="post">
+        <label>Ngày lập:</label><input type="date" name="NgayLap" required>
+        <label>Mã KH:</label><input type="number" name="MaKH" required>
+        <button type="submit">Thêm</button>
+    </form>
+
+    <h3>Danh sách Hóa Đơn</h3>
+    <table>
+        <tr><th>Mã HD</th><th>Ngày lập</th><th>Mã KH</th><th>Hành động</th></tr>
+        {% for h in ds %}
+        <tr>
+            <td>{{ h.MaHD }}</td>
+            <td>{{ h.NgayLap }}</td>
+            <td>{{ h.MaKH }}</td>
+            <td>
+                <form action="/hoadon/delete/{{ h.MaHD }}" method="post">
+                    <button type="submit">🗑️</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">← Về trang chủ</a>
+</body>
+</html>
